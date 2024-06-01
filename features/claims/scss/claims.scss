@@ -1,0 +1,43 @@
+/** Claims module SCSS */
+.claims {
+  .remove-border {
+    border: 0;
+  }
+
+  .button-floating-action {
+    position: fixed !important;
+    top: calc(90vh - 60px) !important;
+    right: 2vw !important;
+    border-radius: 100px !important;
+    border-width: 0 !important;
+    padding: 5px 12px 5px 12px !important;
+    z-index: 999 !important;
+    box-shadow: 5px 5px 5px #888888 !important;
+  }
+
+  .opacity6 {
+    opacity: 0.6;
+  }
+
+  .claim-info-first {
+    padding-bottom: 6px;
+  }
+
+  .claim-info-second {
+    padding-top: 0px;
+  }
+
+  .claims-add-images-box {
+    display: inline-block;
+    position: relative;
+    width: 33%;
+  }
+
+  .claims-add-images-box-icon {
+    position: absolute;
+    top: 2%;
+    right: 0;
+    color: #000000b3;
+  }
+
+}

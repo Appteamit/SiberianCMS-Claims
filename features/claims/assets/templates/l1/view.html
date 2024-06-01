@@ -1,0 +1,68 @@
+<ion-view sb-page-background
+          class="claims claims-home"
+          ng-controller="ClaimsViewController">
+    <ion-nav-title> {{ claim_info.title }}</ion-nav-title>
+    <ion-header-bar class="bar-subheader bar-custom bar bar-header"
+                    ng-if="!is_loading">
+        <p class="title-subheader"> {{ ::"Total" | translate:"claims" }} <span class="pull-right"><i>{{ claim_info.currency_code }}</i>{{ claim_info.amount }}</span>
+        </p>
+    </ion-header-bar>
+
+    <ion-content class="has-header has-footer has-subheader">
+
+        <div class="loader"
+             ng-show="is_loading">
+            <ion-spinner class="spinner-custom"></ion-spinner>
+        </div>
+
+
+        <div class="list card"
+             ng-if="!is_loading"
+             ng-repeat="value in claimsItems">
+            <div class="item item-custom remove-border claim-info-first">
+				<span class="item-note"
+                      ng-if="allow_edit"
+                      ng-click="deleteItem(value.item_id)">
+			      <i class="icon ion-trash-b"></i>
+			    </span>
+                <h2>{{value.category_name}}</h2>
+                <p class="opacity6">{{value.expense_date}}</p>
+                <p class="opacity6"
+                   ng-if="value.receipts > 0">{{value.receipts}} {{ ::"Receipts" | translate:"claims"
+                    }}</p>
+            </div>
+
+            <div class="item item-custom remove-border claim-info-second">
+                <h2 class="icon-active-custom text-right"><span>{{value.currency_code}}</span>{{value.amount}}</h2>
+            </div>
+        </div>
+
+        <div class="list card"
+             ng-if="claimsItems.length == 0">
+            <div class="item item-custom item-body">
+                <p class="text-center">{{ ::"No item added yet, Please add and submit!" | translate:"claims" }}</p>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <ion-footer-bar class="bar-footer bar-custom bar bar-footer"
+                    ng-click="submitClaim()"
+                    ng-if="allow_edit && claimsItems.length">
+        <div class="title">{{ ::"SUBMIT" | translate:"claims" }}</div>
+    </ion-footer-bar>
+
+    <button class="button light ion-plus-round button-floating-action button-positive button-positive-custom"
+            ng-if="is_logged_in && !is_loading && allow_edit"
+            ng-click="addItem()">
+    </button>
+
+    <style type="text/css">
+        .title-subheader {
+            width: 100%;
+            font-size: 18px;
+            padding: 0 6px;
+            margin-top: 2%;
+        }
+    </style>
+</ion-view>

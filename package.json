@@ -1,0 +1,12 @@
+{
+  "name": "Claims",
+  "description": "Employee can apply the claims for their business trip or any expenses for the company by filling in simple form and uploading the receipts!",
+  "type": "module",
+  "version": "1.2.5",
+  "dependencies": {
+    "system": {
+      "type": "SAE",
+      "version": "4.20.19"
+    }
+  }
+}

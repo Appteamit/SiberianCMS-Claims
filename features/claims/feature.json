@@ -1,0 +1,44 @@
+{
+  "name": "Claims",
+  "code": "claims",
+  "version": "1.2.0",
+  "category": "social",
+  "model": "Claims_Model_Claims",
+  "desktop_uri": "claims/application/",
+  "routes": [
+    {
+      "root": true,
+      "state": "claims-home",
+      "controller": "ClaimsController",
+      "url": "claims/mobile_list/index/value_id/:value_id",
+      "template": "l1/home.html",
+      "cache": false
+    },
+    {
+      "state": "claims-view",
+      "controller": "ClaimsViewController",
+      "url": "claims/mobile_list/index/value_id/:value_id/id/:id",
+      "template": "l1/view.html",
+      "cache": false
+    },
+    {
+      "state": "claims-add",
+      "controller": "ClaimsAddController",
+      "url": "claims/mobile_list/index/value_id/:value_id",
+      "template": "l1/add.html",
+      "cache": false
+    }    
+  ],
+  "icons": [
+    "icons/claims-flat.png"
+  ],
+  "files": [
+    "js/controllers/claims.js",
+    "js/factory/claims.js",
+    "scss/claims.scss"
+  ],
+  "compile": true,
+  "use_account": true,
+  "only_once": true,
+  "load_on_start": false   
+}

@@ -1,0 +1,445 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-05-23T11:00:10+02:00\n"
+"PO-Revision-Date: 2020-05-23T11:00:10+02:00\n"
+"Language: \n"
+
+# GMT 1590863039.1001
+msgctxt "claims"
+msgid "Claims"
+msgstr "Claims"
+
+# GMT 1590863039.1002
+#, mobile
+msgctxt "claims"
+msgid "Claims"
+msgstr "Claims"
+
+# GMT 1590863039.1003
+msgctxt "claims"
+msgid "Saved successfully"
+msgstr "Saved successfully"
+
+# GMT 1590863039.1004
+msgctxt "claims"
+msgid "Category you are trying to edit does not exists."
+msgstr "Category you are trying to edit does not exists."
+
+# GMT 1590863039.1005
+msgctxt "claims"
+msgid "Success"
+msgstr "Success"
+
+# GMT 1590863039.1006
+msgctxt "claims"
+msgid "We are unable to delete this category!"
+msgstr "We are unable to delete this category!"
+
+# GMT 1590863039.1007
+msgctxt "claims"
+msgid "Deleted successfully"
+msgstr "Deleted successfully"
+
+# GMT 1590863039.1008
+msgctxt "claims"
+msgid "Status you are trying to edit does not exists."
+msgstr "Status you are trying to edit does not exists."
+
+# GMT 1590863039.1009
+msgctxt "claims"
+msgid "We are unable to delete this status!"
+msgstr "We are unable to delete this status!"
+
+# GMT 1590863039.1010
+msgctxt "claims"
+msgid "Status Name"
+msgstr "Status Name"
+
+# GMT 1590863039.1011
+msgctxt "claims"
+msgid "Category Name"
+msgstr "Category Name"
+
+# GMT 1590863039.1012
+msgctxt "claims"
+msgid "Is Default"
+msgstr "Is Default"
+
+# GMT 1590863039.1013
+msgctxt "claims"
+msgid "You are about to remove this status ! Are you sure ?"
+msgstr "You are about to remove this status ! Are you sure ?"
+
+# GMT 1590863039.1014
+msgctxt "claims"
+msgid "You are about to remove this Category ! Are you sure ?"
+msgstr "You are about to remove this Category ! Are you sure ?"
+
+# GMT 1590863039.1015
+msgctxt "claims"
+msgid "All"
+msgstr "All"
+
+# GMT 1590863039.1016
+msgctxt "claims"
+msgid "From"
+msgstr "From"
+
+# GMT 1590863039.1017
+msgctxt "claims"
+msgid "To"
+msgstr "To"
+
+# GMT 1590863039.1018
+msgctxt "claims"
+msgid "User"
+msgstr "User"
+
+# GMT 1590863039.1019
+msgctxt "claims"
+msgid "Title"
+msgstr "Title"
+
+# GMT 1590863039.1020
+msgctxt "claims"
+msgid "Amount"
+msgstr "Amount"
+
+# GMT 1590863039.1021
+msgctxt "claims"
+msgid "Date"
+msgstr "Date"
+
+# GMT 1590863039.1022
+msgctxt "claims"
+msgid "Status"
+msgstr "Status"
+
+# GMT 1590863039.1023
+msgctxt "claims"
+msgid "Action"
+msgstr "Action"
+
+# GMT 1590863039.1024
+msgctxt "claims"
+msgid "VIEW"
+msgstr "VIEW"
+
+# GMT 1590863039.1025
+msgctxt "claims"
+msgid "Back"
+msgstr "Back"
+
+# GMT 1590863039.1026
+msgctxt "claims"
+msgid "Location"
+msgstr "Location"
+
+# GMT 1590863039.1027
+msgctxt "claims"
+msgid "Post Date"
+msgstr "Post Date"
+
+# GMT 1590863039.1028
+msgctxt "claims"
+msgid "Start Date"
+msgstr "Start Date"
+
+# GMT 1590863039.1029
+msgctxt "claims"
+msgid "End Date"
+msgstr "End Date"
+
+# GMT 1590863039.1030
+msgctxt "claims"
+msgid "Settings"
+msgstr "Settings"
+
+# GMT 1590863039.1031
+msgctxt "claims"
+msgid "Category"
+msgstr "Category"
+
+# GMT 1590863039.1032
+msgctxt "claims"
+msgid "Status"
+msgstr "Status"
+
+# GMT 1590863039.1033
+msgctxt "claims"
+msgid "Create a Category"
+msgstr "Create a Category"
+
+# GMT 1590863039.1034
+msgctxt "claims"
+msgid "Manage Category"
+msgstr "Manage Category"
+
+# GMT 1590863039.1033
+msgctxt "claims"
+msgid "Category Name"
+msgstr "Category Name"
+
+# GMT 1590863039.1034
+msgctxt "claims"
+msgid "S.NO"
+msgstr "S.NO"
+
+# GMT 1590863039.1035
+msgctxt "claims"
+msgid "Create a Status"
+msgstr "Create a Status"
+
+# GMT 1590863039.1036
+msgctxt "claims"
+msgid "Manage Status"
+msgstr "Manage Status"
+
+# GMT 1590863039.1037
+msgctxt "claims"
+msgid "Status Name"
+msgstr "Status Name"
+
+# GMT 1590863039.1038
+msgctxt "claims"
+msgid "Default assign"
+msgstr "Default assign"
+
+# GMT 1590863039.1039
+msgctxt "claims"
+msgid "Close"
+msgstr "Close"
+
+# GMT 1590863039.1040
+#, mobile
+msgctxt "claims"
+msgid "Add Item"
+msgstr "Add Item"
+
+# GMT 1590863039.1041
+#, mobile
+msgctxt "claims"
+msgid "Category"
+msgstr "Category"
+
+# GMT 1590863039.1042
+#, mobile
+msgctxt "claims"
+msgid "Amount"
+msgstr "Amount"
+
+# GMT 1590863039.1043
+#, mobile
+msgctxt "claims"
+msgid "Date"
+msgstr "Date"
+
+# GMT 1590863039.1044
+#, mobile
+msgctxt "claims"
+msgid "Note"
+msgstr "Note"
+
+# GMT 1590863039.1045
+#, mobile
+msgctxt "claims"
+msgid "Upload Receipts"
+msgstr "Upload Receipts"
+
+# GMT 1590863039.1046
+#, mobile
+msgctxt "claims"
+msgid "Done"
+msgstr "Done"
+
+# GMT 1590863039.1047
+#, mobile
+msgctxt "claims"
+msgid "Add Next"
+msgstr "Add Next"
+
+# GMT 1590863039.1048
+#, mobile
+msgctxt "claims"
+msgid "New Claim"
+msgstr "New Claim"
+
+# GMT 1590863039.1049
+#, mobile
+msgctxt "claims"
+msgid "Title"
+msgstr "Title"
+
+# GMT 1590863039.1050
+#, mobile
+msgctxt "claims"
+msgid "Location"
+msgstr "Location"
+
+# GMT 1590863039.1051
+#, mobile
+msgctxt "claims"
+msgid "Start Date"
+msgstr "Start Date"
+
+# GMT 1590863039.1052
+#, mobile
+msgctxt "claims"
+msgid "End Date"
+msgstr "End Date"
+
+# GMT 1590863039.1053
+#, mobile
+msgctxt "claims"
+msgid "Next"
+msgstr "Next"
+
+# GMT 1590863039.1054
+#, mobile
+msgctxt "claims"
+msgid "Click here to log-in"
+msgstr "Click here to log-in"
+
+# GMT 1590863039.1055
+#, mobile
+msgctxt "claims"
+msgid "You have not submitted any claim yet!"
+msgstr "You have not submitted any claim yet!"
+
+# GMT 1590863039.1056
+#, mobile
+msgctxt "claims"
+msgid "Total"
+msgstr "Total"
+
+# GMT 1590863039.1057
+#, mobile
+msgctxt "claims"
+msgid "No item added yet, Please add and submit!"
+msgstr "No item added yet, Please add and submit!"
+
+# GMT 1590863039.1058
+#, mobile
+msgctxt "claims"
+msgid "SUBMIT"
+msgstr "SUBMIT"
+
+# GMT 1590863039.1059
+#, mobile
+msgctxt "claims"
+msgid "Error"
+msgstr "Error"
+
+# GMT 1590863039.1060
+#, mobile
+msgctxt "claims"
+msgid "OK"
+msgstr "OK"
+
+# GMT 1590863039.1061
+#, mobile
+msgctxt "claims"
+msgid "Cancel"
+msgstr "Cancel"
+
+# GMT 1590863039.1062
+#, mobile
+msgctxt "claims"
+msgid "Claims"
+msgstr "Claims"
+
+# GMT 1590863039.1063
+#, mobile
+msgctxt "claims"
+msgid "This image is already added!"
+msgstr "This image is already added!"
+
+# GMT 1590863039.106
+#, mobile
+msgctxt "claims"
+msgid "Take a picture"
+msgstr "Take a picture"
+
+# GMT 1590863039.1065
+#, mobile
+msgctxt "claims"
+msgid "Import from Library"
+msgstr "Import from Library"
+
+# GMT 1590863039.1066
+#, mobile
+msgctxt "claims"
+msgid "Are you sure want to submit?"
+msgstr "Are you sure want to submit?"
+
+# GMT 1590863039.1067
+#, mobile
+msgctxt "claims"
+msgid "Yes"
+msgstr "Yes"
+
+# GMT 1590863039.1068
+#, mobile
+msgctxt "claims"
+msgid "No"
+msgstr "No"
+
+# GMT 1590863039.1069
+#, mobile
+msgctxt "claims"
+msgid "Are you sure want to delete this?"
+msgstr "Are you sure want to delete this?"
+
+# GMT 1590863039.1070
+#, mobile
+msgctxt "claims"
+msgid "Success"
+msgstr "Success"
+
+# GMT 1590863039.1071
+msgctxt "claims"
+msgid "Open the claims dashboard!"
+msgstr "Open the claims dashboard!"
+
+# GMT 1590863039.1072
+msgctxt "claims"
+msgid "Statuses"
+msgstr "Statuses"
+
+# GMT 1590863039.1073
+msgctxt "claims"
+msgid "Categories"
+msgstr "Categories"
+
+# GMT 1590863039.1074
+msgctxt "claims"
+msgid "Manage categories"
+msgstr "Manage categories"
+
+# GMT 1590863039.1075
+msgctxt "claims"
+msgid "Create a status"
+msgstr "Create a status"
+
+# GMT 1590863039.1076
+msgctxt "claims"
+msgid "Manage statuses"
+msgstr "Manage statuses"
+
+# GMT 1590863039.1077
+msgctxt "claims"
+msgid "Dashboard"
+msgstr "Dashboard"
+
+# GMT 1590863039.1078
+msgctxt "claims"
+msgid "Claims dashboard"
+msgstr "Claims dashboard"
+

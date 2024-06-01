@@ -1,0 +1,100 @@
+<ion-modal-view sb-page-background
+                class="claims claims-add">
+
+    <ion-header-bar class="bar-custom">
+        <div class="buttons">
+            <button class="button button-clear"
+                    ng-click="closeAddItemModal()">
+                <i class="icon ion-sb-close-modal"></i>
+            </button>
+        </div>
+        <h1 class="title">{{ ::"Add Item" | translate:"claims" }}</h1>
+    </ion-header-bar>
+
+    <ion-content class="has-header">
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    {{ ::"Category" | translate:"claims" }} *
+                </div>
+                <select name="category_id"
+                        ng-required="true"
+                        ng-model="claim_post.category_id">
+                    <option ng-value="category.category_id"
+                            ng-repeat="category in categories">
+                        {{category.category_name}}
+                    </option>
+                </select>
+            </label>
+
+            <label class="item item-custom item-input item-stacked-label">
+                <span class="input-label">{{ ::"Amount" | translate:"claims" }} *</span>
+                <input type="text"
+                       ng-model="claim_post.amount"
+                       ng-init="claim_post.amount == ''"
+                       ng-value="">
+            </label>
+
+            <label class="item item-custom item-input item-stacked-label">
+                <span class="input-label">{{ ::"Date" | translate:"claims" }} </span>
+                <input type="date"
+                       ng-model="claim_post.expense_date"
+                       ng-init="claim_post.expense_date == ''"
+                       ng-value="">
+            </label>
+
+            <label class="item item-custom item-input item-stacked-label">
+                <span class="input-label">{{ ::"Note" | translate:"claims" }} </span>
+                <textarea ng-model="claim_post.remark"
+                          ng-init="claim_post.remark == ''"
+                          ng-value=""></textarea>
+            </label>
+
+            <div class="item item-custom item-body"
+                 ng-if="claim_post.images.length > 0">
+                <ol>
+                    <li ng-repeat="img in claim_post.images"
+                        class="claims-add-images-box">
+                        <img ng-src="{{img}}"
+                             class="full-image"
+                             style="margin-bottom: 2%;">
+                        <i class="icon ion-close claims-add-images-box-icon"
+                           ng-click="removeImage(img)"></i>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="item item-icon-left item-custom"
+                 ng-click="addPicture()">
+                <i class="icon ion-camera"></i> {{ "Upload Receipts" | translate:"claims" }}
+            </div>
+
+            <div class="item item-custom remove-border">
+                <div class="row">
+                    <div class="col-50">
+                        <button ng-click="claimItemSave(1)"
+                                ng-disabled="((claim_post.category_id > 0 && claim_post.amount > 0 ) ? false : true)"
+                                class="button button-positive-custom pull-left claim-save-button">
+                            {{ ::"Done" | translate:"claims" }}
+                        </button>
+                    </div>
+                    <div class="col-50">
+                        <button ng-click="claimItemSave(2)"
+                                ng-disabled="((claim_post.category_id > 0 && claim_post.amount > 0 ) ? false : true)"
+                                class="button button-custom pull-right claim-save-button">
+                            {{ ::"Add Next" | translate:"claims" }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ion-content>
+
+    <style type="text/css">
+        .claim-save-button {
+            width: 90%;
+        }
+    </style>
+
+</ion-modal-view>

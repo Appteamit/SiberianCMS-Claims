@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <claims_application_edit>
+        <views>
+            <content class="application_view_customization_features_edit_tabbareditor"
+                     template="application/customization/features/edit/tabbar_editor.phtml"/>
+            <content_editor class="core_view_default"
+                            template="claims/application/edit.phtml"/>
+        </views>
+    </claims_application_edit>
+
+
+    <claims_application_claims>
+        <addLayout name="admin_menu"/>
+        <addLayout name="customization_default"/>
+        <base>
+            <title>claims</title>
+        </base>
+        <views>
+            <content class="admin_view_default"
+                     template="claims/application/claim_list.phtml"/>
+        </views>
+        <actions>
+            <customization_sidebar_left name="setCurrentLink">
+                <code>claims</code>
+            </customization_sidebar_left>
+            <header_menu name="setCurrentLink">
+                <code>claims</code>
+            </header_menu>
+        </actions>
+    </claims_application_claims>
+
+    <claims_application_view>
+        <addLayout name="admin_menu"/>
+        <addLayout name="customization_default"/>
+        <base>
+            <title>Claims View</title>
+        </base>
+        <views>
+            <content class="admin_view_default"
+                     template="claims/application/view.phtml"/>
+        </views>
+        <actions>
+            <customization_sidebar_left name="setCurrentLink">
+                <code>claims</code>
+            </customization_sidebar_left>
+            <header_menu name="setCurrentLink">
+                <code>claims</code>
+            </header_menu>
+        </actions>
+    </claims_application_view>
+
+</layout>

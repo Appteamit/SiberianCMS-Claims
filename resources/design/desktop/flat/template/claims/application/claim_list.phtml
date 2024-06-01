@@ -1,0 +1,223 @@
+<?php
+$value_id = (new Claims_Model_Claims())->getCurrentValueId();
+$statusList = (new Claims_Model_Status())->findAll(["value_id = ?" => $value_id, 'status_name != ?' => 'Not Submitted']);
+?>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-content-wrapper form-horizontal">
+            <div class="content solo-page">
+                <h3 class="title-editor border-blue text-center">
+                    <?php echo p__("claims", "Claims"); ?>
+                </h3>
+
+                <div class="subcontent content-color container-fluid">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div id="row_filter_metrics" class="pull-right">
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <select class="input-flat sb-tour dt-search color-blue" name="status_id"
+                                            id="status_id" data-dynatable-query="status_id">
+                                        <option value=""><?php echo p__("claims", 'All'); ?></option>
+                                        <?php foreach ($statusList as $key => $value) { ?>
+                                            <option value="<?php echo $value->getId(); ?>"><?php echo $value->getStatusName(); ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 col-sm-6 col-xs-6">
+                                    <label for="from"><?php echo p__("claims", "From"); ?></label>
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-6">
+                                    <input type="text" id="from" name="from" class="input-flat sb-tour dt-search"
+                                           autocomplete="off" data-dynatable-query="from">
+                                </div>
+                                <div class="col-md-1 col-sm-6 col-xs-6">
+                                    <label for="to"><?php echo p__("claims", "To"); ?></label>
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-6">
+                                    <input type="text" id="to" name="to" class="input-flat sb-tour dt-search"
+                                           autocomplete="off" data-dynatable-query="to">
+                                </div>
+                            </div>
+
+                            <table id="dynamic-customers"
+                                   class="table content-white-bkg sb-pager">
+                                <thead>
+                                <tr class="border-grey">
+                                    <th data-dynatable-column="id"
+                                        style="width: 5%;"><?php echo p__("claims", "ID"); ?></th>
+                                    <th data-dynatable-column="firstname"
+                                        style="width: 20%;"><?php echo p__("claims", "User"); ?></th>
+                                    <th data-dynatable-column="title"
+                                        style="width: 15%;"><?php echo p__("claims", "Title"); ?></th>
+                                    <th data-dynatable-column="amount"
+                                        style="width: 20%;"><?php echo p__("attendance", "Amount"); ?></th>
+                                    <th data-dynatable-column="created_at"
+                                        style="width: 20%;"><?php echo p__("attendance", "Date"); ?></th>
+                                    <th style="width: 15%;"><?php echo p__("attendance", "Status"); ?></th>
+                                    <th style="width: 5%;"
+                                        class="text-right"><?php echo p__("attendance", "Action"); ?></th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="/app/sae/design/desktop/flat/js/dynatable/jquery.dynatable.css"
+      media="screen"
+      rel="stylesheet"
+      type="text/css">
+<script type="text/javascript"
+        src="/app/sae/design/desktop/flat/js/dynatable/jquery.dynatable.js"></script>
+
+<style type="text/css">
+    #dynamic-customers {
+        margin-top: 15px;
+    }
+    .dynatable-record-count {
+        bottom: 0px !important;
+    }
+</style>
+
+<script type="text/javascript">
+    var uriParams = {};
+    let rowTemplate = `
+    <tr class="dynarow">
+        <td>
+            <b>#(CLAIM_ID)</b>
+        </td>
+        <td>(NAME)</td>
+        <td>(TITLE)</td>
+        <td>(AMOUNT)</td>
+        <td>(DATE)</td>
+        <td>(STATUS)</td>
+        <td>
+             <a href="/claims/application/view/id/(CLAIM_ID)"
+               class="btn btn-xs btn-info">
+                <?php echo __js("VIEW") ?>
+            </a>
+        </td>
+    </tr>`;
+
+    function rowWriter(rowIndex, record, columns, cellWriter) {
+        return rowTemplate
+            .replace(/\(CLAIM_ID\)/g, record.id)
+            .replace(/\(NAME\)/g, record.name)
+            .replace(/\(DATE\)/g, record.created_at)
+            .replace(/\(AMOUNT\)/g, record.amount)
+            .replace(/\(STATUS\)/g, record.status_name)
+            .replace(/\(TITLE\)/g, record.title)
+    }
+
+    $.dynatableSetup({
+        table: {
+            defaultColumnIdStyle: 'noStyle'
+        },
+        features: {
+            paginate: true,
+            sort: true,
+            pushState: true,
+            search: true,
+            recordCount: true,
+            perPageSelect: false,
+        },
+    });
+
+    let tableCustomers = $('#dynamic-customers');
+
+    tableCustomers.bind('dynatable:preinit', function (e, dynatable) {
+        dynatable.utility.textTransform.noStyle = function (text) {
+            return text;
+        };
+    });
+
+    tableCustomers.bind('dynatable:init', function (e, dynatable) {
+        dynatable.queries.functions['to'] = function (r, val) {
+            return queryValue;
+        };
+        dynatable.queries.functions['from'] = function (r, val) {
+            return queryValue;
+        };
+
+    });
+
+    tableCustomers.bind('dynatable:afterProcess', function (e, data) {
+        uriParams = data.queries;
+    });
+
+
+    tableCustomers.bind('dynatable:push', function (e, dynatable) {
+        uriParams = dynatable.queries;
+    });
+
+    // And on the table
+    tableCustomers.dynatable({
+        dataset: {
+            ajax: true,
+            ajaxUrl: '/claims/application/fetch-claims',
+            ajaxOnLoad: true,
+            records: [],
+            perPageDefault: 25
+        },
+        inputs: {
+            processingText: '<?php echo __jss("Loading ...") ?>',
+            searchPlaceholder: '<?php echo __jss("Search user ...") ?>',
+            recordCountText: '<?php echo __jss("Showing") ?> ',
+            filteredFrom: ' (<?php echo __jss("filtered from #TOTAL# total records") ?>)',
+            recordText: '<?php echo __jss("record") ?>',
+            recordTextPlural: '<?php echo __jss("records") ?>',
+            textOf: '<?php echo __jss("of") ?>',
+            textTo: '<?php echo __jss("to") ?>',
+            queries: $('.dt-search')
+        },
+        writers: {
+            _rowWriter: rowWriter
+        }
+    });
+
+    $(document).ready(function () {
+        if ($.datepicker.regional['<?php echo Core_Model_Language::getCurrentLanguageDatepicker(); ?>']) {
+            $.datepicker.setDefaults($.datepicker.regional['<?php echo Core_Model_Language::getCurrentLanguageDatepicker(); ?>']);
+        } else {
+            $.datepicker.setDefaults($.datepicker.regional['en']);
+        }
+        $("#from").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        $("#to").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#from").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+
+
+        let exportCsv = $('#export_customer');
+        exportCsv.off('click');
+        exportCsv.on('click', function () {
+            if (typeof uriParams === 'undefined') {
+                let uri = "<?php echo $this->getUrl('claims/application/export-csv'); ?>";
+                window.open(uri, '_blank');
+            } else {
+                let uri = "<?php echo $this->getUrl('claims/application/export-csv'); ?>?" + jQuery.param(uriParams);
+                window.open(uri, '_blank');
+            }
+        });
+
+    });
+
+</script>

@@ -1,0 +1,289 @@
+<?php
+
+$option_value = $this->getOptionValue();
+/*Category*/
+$categoryFrom = new Claims_Form_Category();
+$categoryFrom->setElementValueById('value_id', $option_value->getId());
+$categoryFrom->addNav("nav-add-category", "Submit", false);
+$categories = (new Claims_Model_Category())->findAll(["value_id" => $option_value->getId()]);
+$categoryDeleteFrom = new Claims_Form_Category_Delete();
+
+/*Status*/
+$statusList = (new Claims_Model_Status())->find($option_value->getId(), "value_id");
+if (empty($statusList->getId())) {
+    $allStatus = (new Claims_Model_Status())->defaultStatus();
+    foreach ($allStatus as $key => $value) {
+        $aSave = (new Claims_Model_Status())
+            ->find(['value_id' => $option_value->getId(), 'status_name' => $value['name']])
+            ->setValueId($option_value->getId())
+            ->setStatusName($value['name'])
+            ->setIsDefault($value['is_default'])
+            ->save();
+    }
+}
+$statusModel = new Claims_Model_Status;
+$statusList = $statusModel->findAll(array('value_id' => $option_value->getId()), 'id ASC');
+$statusform = new Claims_Form_Status();
+$statusform->setValueId($option_value->getId());
+$statusDeleteFrom = new Claims_Form_Status_Delete();
+?>
+
+
+<div id="claimslist"
+     class="claims">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs parent-tab"
+        role="tablist">
+
+        <li class="active"
+            role="presentation">
+            <a href="#claims"
+               aria-controls="access"
+               role="tab"
+               data-toggle="tab">
+                <span class="hidden-xs access"><?php echo p__('claims', "Claims") ?></span>
+            </a>
+        </li>
+
+        <li role="presentation">
+            <a href="#category"
+               aria-controls="access"
+               role="tab"
+               data-toggle="tab">
+                <span class="hidden-xs access"><?php echo p__('claims', "Categories") ?></span>
+            </a>
+        </li>
+
+        <li role="presentation">
+            <a href="#status"
+               aria-controls="access"
+               role="tab"
+               data-toggle="tab">
+                <span class="hidden-xs access"><?php echo p__('claims', "Statuses") ?></span>
+            </a>
+        </li>
+
+        <li role="presentation">
+            <a href="#settings"
+               aria-controls="access"
+               role="tab"
+               data-toggle="tab">
+                <span class="hidden-xs access"><?php echo p__('claims', "Settings") ?></span>
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="tab-content">
+
+        <div role="tabpanel"
+             class="tab-pane active"
+             id="claims">
+            <div class="section">
+                <div class="feature-block-add">
+                    <h3 class="title-editor no-border-radius title-feature-indent">
+                        <?php echo p__('claims', 'Claims'); ?>
+                    </h3>
+                    <div class="container-fluid first-row-feature content-feature feature-manage-items">
+                        <a href="/claims/application/claims"
+                           class="btn color-blue"
+                           target="_blank">
+                            <span class="hidden-xs access"><?php echo p__('claims', 'Open the claims dashboard!') ?></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layout settings tab -->
+        <div role="tabpanel"
+             class="tab-pane"
+             id="settings">
+            <div class="section">
+                <?php echo $this->importBackground($option_value, false, false); ?>
+            </div>
+        </div>
+
+        <!-- Category tab -->
+        <div role="tabpanel"
+             class="tab-pane"
+             id="category">
+            <!-- Services block -->
+            <div class="feature-block-add">
+                <h3 class="title-editor no-border-radius title-feature-indent">
+                    <?php echo p__('claims', 'Categories'); ?>
+                    <button type="button"
+                            class="feature-toggle-add toggle_design color-blue pull-right bt-header-right btn">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </h3>
+            </div>
+
+            <div class="feature-block-create">
+                <h3 class="title-editor no-border-radius title-feature-indent">
+                    <?php echo p__('claims', 'Create a Category'); ?>
+                </h3>
+                <div class="container-fluid first-row-feature content-feature feature-manage-items">
+                    <?php echo $categoryFrom; ?>
+                </div>
+            </div>
+            <br>
+
+            <?php if ($categories->count() > 0): ?>
+                <div class="feature-block-list">
+                    <div class="margin-top">
+                        <h3 class="title-editor no-border-radius title-feature-indent">
+                            <?php echo p__('claims', 'Manage categories'); ?>
+                            <button type="button"
+                                    class="toggle_design color-blue pull-right bt-header-right btn feature-toggle-items">
+                                <i class="fa fa-chevron-down"></i>
+                            </button>
+                        </h3>
+                        <div class="container-fluid first-row-feature content-feature feature-manage-items">
+                            <table class="table content-white-bkg sb-pager">
+                                <thead>
+                                <tr class="border-blue">
+                                    <th style="width:5%;"><?php echo p__('claims', 'S.NO'); ?></th>
+                                    <th style="width:70%;"><?php echo p__('claims', 'Category Name'); ?></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($categories as $key => $type): ?>
+                                    <tr id="type_category_element_<?php echo $type->getId(); ?>"
+                                        class="type-manage-element sb-pager">
+                                        <td><?php echo $key + 1; ?></td>
+                                        <td><?php echo $type->getCategoryName(); ?></td>
+                                        <td class="edit-action open-edit text-right"
+                                            data-id="type_<?php echo $type->getId(); ?>"
+                                            data-form-url="<?php echo __path("/claims/application/loadcategoryform", array("id" => $type->getId(), "value_id" => $option_value->getId())); ?>">
+                                            <i class="fa fa-pencil"></i>
+                                        </td>
+
+                                        <td class="delete-action">
+                                            <?php
+                                            $categoryDeleteFrom->setAttrib("data-rowid", "type_category_element_" . $type->getId());
+                                            $categoryDeleteFrom->getElement("id")->setValue($type->getId());
+                                            echo $categoryDeleteFrom;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr class="edit-form" data-id="type_<?php echo $type->getId(); ?>"
+                                        style="display: none;">
+                                        <td colspan="4">
+                                            <p class="close-edit" data-id="type_<?php echo $type->getId(); ?>">
+                                                <i class="fa fa-times"></i><?php echo p__('claims', "Close") ?>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <!-- Status tab -->
+        <div role="tabpanel" class="tab-pane" id="status">
+            <!-- Services block -->
+            <div class="feature-block-add">
+                <h3 class="title-editor no-border-radius title-feature-indent">
+                    <?php echo p__('claims', 'Statuses'); ?>
+                    <button type="button"
+                            class="feature-toggle-add toggle_design color-blue pull-right bt-header-right btn">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </h3>
+            </div>
+
+            <div class="feature-block-create">
+                <h3 class="title-editor no-border-radius title-feature-indent">
+                    <?php echo p__('claims', 'Create a status'); ?>
+                </h3>
+                <div class="container-fluid first-row-feature content-feature feature-manage-items">
+                    <?php echo $statusform; ?>
+                </div>
+            </div>
+            <br>
+
+            <?php if ($statusList->count() > 0): ?>
+                <div class="feature-block-list">
+                    <div class="margin-top">
+                        <h3 class="title-editor no-border-radius title-feature-indent">
+                            <?php echo p__('claims', 'Manage statuses'); ?>
+                            <button type="button"
+                                    class="toggle_design color-blue pull-right bt-header-right btn feature-toggle-items">
+                                <i class="fa fa-chevron-down"></i>
+                            </button>
+                        </h3>
+                        <div class="container-fluid first-row-feature content-feature feature-manage-items">
+                            <table class="table content-white-bkg sb-pager">
+                                <thead>
+                                <tr class="border-blue">
+                                    <th style="width:5%;"><?php echo p__('claims', 'S.NO'); ?></th>
+                                    <th style="width:60%;"><?php echo p__('claims', 'Status Name'); ?></th>
+                                    <th style="width:20%;"><?php echo p__('claims', 'Default assign'); ?></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($statusList as $key => $type): ?>
+                                    <tr id="type_status_element_<?php echo $type->getId(); ?>"
+                                        class="type-manage-element sb-pager">
+                                        <td><?php echo $key + 1; ?></td>
+                                        <td><?php echo $type->getStatusName(); ?></td>
+                                        <td><?php echo $type->getIsDefault() == 1 ? 'Yes' : 'No'; ?></td>
+
+                                        <?php if ($type->getStatusName() != 'Not Submitted'): ?>
+                                            <td class="edit-action open-edit text-right"
+                                                data-id="status_<?php echo $type->getId(); ?>"
+                                                data-form-url="<?php echo __path("/claims/application/loadstatusform", array("id" => $type->getId(), "value_id" => $option_value->getId())); ?>">
+                                                <i class="fa fa-pencil"></i>
+                                            </td>
+                                            <td class="delete-action">
+                                                <?php
+                                                $statusDeleteFrom->setAttrib("data-rowid", "type_status_element_" . $type->getId());
+                                                $statusDeleteFrom->getElement("id")->setValue($type->getId());
+                                                echo $statusDeleteFrom;
+                                                ?>
+                                            </td>
+                                        <?php else: ?>
+                                            <td></td>
+                                            <td></td>
+                                        <?php endif; ?>
+
+                                    </tr>
+                                    <tr class="edit-form"
+                                        data-id="status_<?php echo $type->getId(); ?>"
+                                        style="display: none;">
+                                        <td colspan="4">
+                                            <p class="close-edit"
+                                               data-id="status_<?php echo $type->getId(); ?>">
+                                                <i class="fa fa-times"></i><?php echo p__('claims', "Close") ?>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        bindForms("#claimslist");
+    });
+</script>

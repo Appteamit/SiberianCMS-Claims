@@ -1,0 +1,172 @@
+<?php
+$business = $this->getBusiness();
+$customer = $this->getCustomer();
+$status = $this->getStatus();
+$currency_code = Core_Model_Language::getCurrencySymbol();
+$items = $this->getItems();
+?>
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-content-wrapper form-horizontal">
+            <div class="content solo-page">
+                <h3 class="title-editor border-blue text-center">
+                    <?php echo p__("claims", "Claims"); ?> - <?php echo $business->getTitle(); ?>
+
+                    <a href="##" onClick="history.go(-1); return false;"
+                       class="color-blue btn sb-tour pull-right" style="margin-right:16px;">
+                        <?php echo p__("claims", "Back"); ?>
+                    </a>
+
+                </h3>
+
+                <div class="subcontent content-color container-fluid">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4><?php echo p__("claims", "Claim"); ?></h4>
+                                    <table class="table content-white-bkg sb-pager text-center">
+                                        <tr class="border-grey">
+                                            <td><?php echo p__("claims", "ID"); ?></td>
+                                            <th>#<?php echo $business->getId(); ?></th>
+                                        </tr>
+                                        <tr class="border-grey">
+                                            <td><?php echo p__("claims", "Title"); ?></td>
+                                            <th><?php echo $business->getTitle(); ?></th>
+                                        </tr>
+                                        <tr class="border-grey">
+                                            <td><?php echo p__("claims", "Location"); ?></td>
+                                            <th><?php echo $business->getLocation(); ?></th>
+                                        </tr>
+
+                                        <tr class="border-grey">
+                                            <td><?php echo p__("claims", "Post Date"); ?></td>
+                                            <th><?php echo date('Y-m-d', strtotime($business->getCreatedAt())); ?></th>
+                                        </tr>
+                                        <?php if ($business->getStartDate() != ''): ?>
+                                            <tr class="border-grey">
+                                                <td><?php echo p__("claims", "Start Date"); ?></td>
+                                                <th><?php echo date('Y-m-d', strtotime($business->getStartDate())); ?></th>
+                                            </tr>
+                                        <?php endif; ?>
+                                        <?php if ($business->getEndDate() != ''): ?>
+                                            <tr class="border-grey">
+                                                <td><?php echo p__("claims", "End Date"); ?></td>
+                                                <th><?php echo date('Y-m-d', strtotime($business->getEndDate())); ?></th>
+                                            </tr>
+                                        <?php endif; ?>
+                                        <tr class="border-grey">
+                                            <td><?php echo p__("claims", "Amount"); ?></td>
+                                            <th><?php echo $currency_code . $business->getAmount(); ?></th>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h4><?php echo p__("claims", "Customer Info"); ?></h4>
+                                    <table class="table content-white-bkg sb-pager text-center">
+                                        <tr class="border-grey">
+                                            <td><?php echo p__("claims", "ID"); ?></td>
+                                            <th>#<?php echo $customer->getId(); ?></th>
+                                        </tr>
+                                        <tr class="border-grey">
+                                            <td><?php echo p__("claims", "Name"); ?></td>
+                                            <th><?php echo $customer->getFirstName() . ' ' . $customer->getLastName(); ?></th>
+                                        </tr>
+                                        <tr class="border-grey">
+                                            <td><?php echo p__("claims", "Email"); ?></td>
+                                            <th><?php echo $customer->getEmail(); ?></th>
+                                        </tr>
+                                    </table>
+
+                                    <h4><?php echo p__("claims", "Claim Status"); ?></h4>
+                                    <table class="table content-white-bkg sb-pager text-center">
+                                        <tr class="border-grey">
+                                            <td>
+                                                <select style="width: 50%" id="claim_status"
+                                                        class="form-control required input-flat">
+                                                    <?php foreach ($status as $key => $s) { ?>
+                                                        <option <?php echo $s->getId() == $business->getStatusId() ? 'selected' : ''; ?>
+                                                                value="<?php echo $s->getId(); ?>">
+                                                            <?php echo $s->getStatusName(); ?>
+                                                        </option>
+                                                    <?php } ?>
+
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <h4><?php echo p__("claims", "Items"); ?></h4>
+                            <table class="table content-white-bkg sb-pager text-center">
+                                <thead>
+                                <tr>
+                                    <th><?php echo p__("claims", "Category"); ?></th>
+                                    <th><?php echo p__("claims", "Amount"); ?></th>
+                                    <th><?php echo p__("claims", "Date"); ?></th>
+                                    <th><?php echo p__("claims", "Receipts"); ?></th>
+                                </tr>
+                                </thead>
+
+                                <?php foreach ($items as $key => $i) { ?>
+                                    <tr>
+                                        <td><?php echo $i['category_name']; ?></td>
+                                        <td><?php echo $currency_code . $i['amount']; ?></td>
+                                        <td><?php echo date("F j, Y", strtotime($i['expense_date'])); ?></td>
+                                        <td><?php echo $i['receipts']; ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).off("change", "#claim_status");
+    $(document).on("change", "#claim_status", function (e) {
+        e.preventDefault();
+        let deleteHref = '/claims/application/status-change/id/<?php echo $business->getId(); ?>/status_id/' + $(this).val();
+        swal({
+            title: '<?php echo P__("claims", "Confirmation") ?>',
+            text: '<?php echo P__("claims", "Are you sure you want to change claim status?") ?>',
+            showCancelButton: true,
+            confirmButtonColor: '#0099C7',
+            confirmButtonText: '<?php echo P__("claims", "Yes, Change!")?>',
+            cancelButtonText: '<?php echo P__("claims", "No, go back") ?>',
+            buttons: true
+        }, function (value) {
+            if (!value) {
+                location.reload();
+                return false;
+            }
+
+            formget(deleteHref,
+                {},
+                function (data) {
+                    feature_form_success(data.message);
+
+                    // Reload only on success and when done!
+                    setTimeout(function () {
+                        location.reload();
+                    }, 300)
+                },
+                function (data) {
+                    feature_form_error(JSON.parse(data.responseText).message);
+                },
+                false);
+        });
+    });
+</script>

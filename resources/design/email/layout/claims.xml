@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <claims_sent_admin>
+        <addLayout name="base_email" />
+        <views>
+            <content_email class="core_view_email_default"
+                           template="claims/admin.phtml" />
+        </views>
+    </claims_sent_admin>
+   
+    <claims_sent_user>
+        <addLayout name="base_email" />
+        <views>
+            <content_email class="core_view_email_default"
+                           template="claims/user.phtml" />
+        </views>
+    </claims_sent_user>
+</layout>
